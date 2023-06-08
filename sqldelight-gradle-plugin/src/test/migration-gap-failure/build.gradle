@@ -12,3 +12,11 @@ sqldelight {
     }
   }
 }
+
+dependencies {
+  implementation('org.xerial:sqlite-jdbc') {
+    version {
+      strictly '3.8.10.2'
+    }
+  }
+}

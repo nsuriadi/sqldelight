@@ -47,8 +47,12 @@ class CatalogDatabase private constructor(
     }
 
     private fun Connection.init(initStatements: List<InitStatement>) = apply {
+      val result = prepareStatement("SELECT sqlite_version();").executeQuery()
+      println("nsuriadi - SQLite version: ${result.getString(1)}")
+
       initStatements.forEach { (sqlText, fileLocation) ->
         try {
+          println("nsuriadi - preparing: $sqlText")
           prepareStatement(sqlText).execute()
         } catch (e: Throwable) {
           throw IllegalStateException("Error compiling $fileLocation", e)

@@ -66,6 +66,8 @@ abstract class VerifyMigrationTask : SqlDelightWorkerTask() {
 
   @TaskAction
   fun verifyMigrations() {
+    println("Printing classpath before executing migration")
+    classpath.forEach { println(it.absolutePath) }
     val workQueue = workQueue()
     workQueue.submit(VerifyMigrationAction::class.java) {
       it.workingDirectory.set(workingDirectory)
